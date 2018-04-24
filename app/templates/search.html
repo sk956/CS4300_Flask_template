@@ -13,7 +13,6 @@
         <link href="/static/jqcloud.css" type="text/css" rel="stylesheet"  />
 
     </head>
-
         <form class="form-inline global-search">
 
             <h1 style="font-size: 55px; font-family:Futura; color: #4285F4">
@@ -31,6 +30,15 @@
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title" >
             </div>
             <button type="submit" class="btn btn-info"> title </button>
+
+            {% for keyword in avail_keywords %}
+                <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
+            {% endfor %}
+
+            {% for book in avail_books %}
+                <div hidden class = "book" style="display: none;"> {{book}}</div>
+            {% endfor %}
+
         </form>
      
         <form class="form-inline global-search">
@@ -46,7 +54,6 @@
         {% endif %} 
         
         </form>
-        
      
     
         <form class="form-inline global-search">
@@ -70,8 +77,6 @@
                         <div class = "left"> 
                          <div class="col-md-4 ">
 
-
-
                              <img class="card-img-top d-flex align-items-center bg-light" src="hell.png" 
                                 onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 160 ; this.height = 160">
                         </div>
@@ -82,8 +87,6 @@
                      
                             <h5 class="card-title" >{{d}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">by GoodReads</h6>
-                          
-                   
                         </div>
                         </div>
                 </div>
@@ -115,7 +118,7 @@
                     var wordlist = [] 
                     var numlist = []
                     lst = document.getElementsByClassName("wordcloud")
-                    
+
                     if (lst.length ==13) {
                         console.log(" Word not in index display create a prettier output") 
                     } else {
@@ -141,12 +144,29 @@
                     }); 
                 } 
                 
-            finalist=["romantic","awkward"]
+            console.log("0");
+            keyword_list = document.getElementsByClassName("keyword")
+            console.log("1");
+            console.log(keyword_list);
+            console.log("2");
+            var keyword_array = []
+            for (var i = 0; i < keyword_list.length; i++){
+                keyword_array.push(keyword_list[i].innerText)
+            }
+            console.log("3");
+            book_list = document.getElementsByClassName("book")
+            console.log("4");
+            console.log(book_list);
+            console.log("5");
+            var book_array = []
+            for (var i = 0; i < book_list.length; i++){
+                book_array.push(book_list[i].innerText)
+            }
+            
 
                 $('#keyfield').tokenfield({
                     autocomplete: {
-                        source: finalist,
-                        delay:100
+                        source: keyword_array
                     },  
                     noDuplicate: true ,
                     lookupLimit: 5
@@ -156,7 +176,7 @@
 
                 $('#titlefield').tokenfield({
                     autocomplete: {
-                        source: ['romantic','horror','language', 'computer', 'definitive']      
+                        source: book_array 
                     }, 
            
                     noDuplicate: true ,
@@ -164,11 +184,7 @@
                 }); 
 
         });  
-
-
         </script>
-
-    
     </body>
 
 

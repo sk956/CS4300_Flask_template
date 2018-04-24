@@ -14,9 +14,11 @@ from app.irsystem.models.books import *
 import json
 import os
 import csv
+import unicodedata
 
 project_name = "BookRec"
 net_id = "Hyun Kyo Jung: hj283"
+available_keywords = []
 
 
 def db_word_to_closest_books(word, ith, k = 15):
@@ -89,7 +91,6 @@ def create_tables():
 def put_books_in_db(hash_factor = 100):
 	#load the files
 	docs_compressed = pickle.load(open("docs.pkl", "rb"))
-
 	index_to_book = json.load(open("index_to_book.json"))
 	words_compressed = pickle.load(open("words.pkl", "rb"))
 	index_to_word = json.load(open("index_to_word.json"))
@@ -157,8 +158,27 @@ def put_books_in_db(hash_factor = 100):
 # 	top_books = ['successfully added']
 # 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books)
 
+# @irsystem.route('/entry', methods=['GET'])
+# def entry():
+# 	word_cloud_message = 'Entry Page Trial!'
+# 	top_books_message =  'Lets get it'
+# 	word_cloud = []
+# 	top_books = []
+
+# 	available_words = json.load(open("words.json"))
+# 	available_keywords = [unicodedata.normalize('NFKD', w).encode('ascii', 'ignore') for w in available_words]
+
+# 	return render_template('entry.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_keywords)
+
+
 @irsystem.route('/', methods=['GET'])
 def search():
+	available_books = json.load(open("books.json"))
+	available_books = [unicodedata.normalize('NFKD', b).encode('ascii', 'ignore') for b in available_books]
+
+	available_words = json.load(open("words.json"))
+	available_keywords = [unicodedata.normalize('NFKD', w).encode('ascii', 'ignore') for w in available_words]
+
 	title_input = request.args.get('title_search')
 	keyword_input = request.args.get('keyword_search')
 
@@ -210,4 +230,5 @@ def search():
 			word_cloud_message = 'Word cloud is: '	
 			word_cloud = db_book_to_closest_words(b, int(i) % 100)
 
-	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books)
+	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_keywords, avail_books = available_books)
+
