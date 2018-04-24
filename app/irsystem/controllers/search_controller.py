@@ -34,17 +34,16 @@ def db_word_to_closest_books(word, ith, k = 15):
 	print('after query')
 	dot_products = np.zeros(len(query_result*100))
 	print('before processing')
-	count = 0
 	for book in query_result:
 		np_book = np.fromstring(book.vectors, sep = ', ')
 		num_books = len(np_book) / 200
 		td_np_book = np.reshape(np_book, (num_books, 200))
 		dot_prod = np.dot(td_np_book, avg_word)
-		print(count)
-		count+=1
 		for i in range(num_books):
 			dot_products[book.start_index + i] = dot_prod[i]
 	print('after processing')
+
+	dot_products = np.absolute(dot_products)
 	asort = np.argsort(-dot_products)[:k+1]
 
 	top_k_books = []
@@ -148,7 +147,7 @@ def put_books_in_db(hash_factor = 100):
 # 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books)
 
 # @irsystem.route('/', methods=['GET'])
-# def search():
+# def delandadd():
 # 	empty_db()
 # 	create_tables()
 # 	put_books_in_db()
@@ -169,7 +168,6 @@ def put_books_in_db(hash_factor = 100):
 # 	available_keywords = [unicodedata.normalize('NFKD', w).encode('ascii', 'ignore') for w in available_words]
 
 # 	return render_template('entry.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_keywords)
-
 
 @irsystem.route('/', methods=['GET'])
 def search():
@@ -231,4 +229,3 @@ def search():
 			word_cloud = db_book_to_closest_words(b, int(i) % 100)
 
 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_keywords, avail_books = available_books)
-
