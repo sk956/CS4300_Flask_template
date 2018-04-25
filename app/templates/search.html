@@ -1,5 +1,5 @@
 <html>
-<body > 
+
 
     <style> 
 
@@ -25,7 +25,7 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+       
           <link href = "/static/bootstrap-tagsinput.css" rel = "stylesheet" >   
         <link href = "/static/bootstrap-tags-input-typeahead.css" rel = "stylesheet" > 
         <link href = "/static/bootstrap-grid.css" rel = "stylesheet" >   
@@ -34,6 +34,7 @@
         <link href = "/static/hover.css" rel = "stylesheet" > 
         <link href="/static/jqcloud.css" type="text/css" rel="stylesheet"  />
     </head>
+<body>  
 
 
         <form class="form-inline global-search">
@@ -49,12 +50,15 @@
 
             <br><br>
 
-            <div class="form-group">
+       
+            <div class = "input-group" >
+            <div class="form-group" style = "width: 600px; margin: auto;">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title" >
-            </div>
+            </div> 
+        
 
             <button type="submit" class="btn btn-info"> Go </button>
-
+            </div>
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
@@ -63,6 +67,7 @@
                 <div hidden class = "book" style="display: none;"> {{book}}</div>
             {% endfor %}
         </form>
+
      
 
         <form class="form-inline global-search">
@@ -78,7 +83,7 @@
      
     
         <form class="form-inline global-search">
-            <div class="form-group"> 
+            <div class="form-group" style = "width: 600px; margin: auto;"> 
          
                 <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword"> 
                 
@@ -133,7 +138,7 @@
                               <a id = "link" class = "link"   > {{d[3]}} </a> 
 
                               <a id = "newnewlink" class = "newnewlink"   > hi </a> 
-                              <a id = "newlink" class = "newlink"  >   
+                              <a id = "newlink" class = "newlink"  href = {{d[3]}}>   
                               <img src = "https://s.gr-assets.com/assets/badge/goodreads-badge-read-reviews-a8508f765fac427f58da8ebf9e89721a.png" > </img>                            
                             </a>   
                             {% endif %}

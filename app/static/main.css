@@ -13,7 +13,22 @@ padding-top: 15%;
 padding-bottom: 15px;
 
 }
+#inputs {
+  text-align: center;
+  padding: 10px;
+  width: 480px;
+  margin: auto;
+}
 
+.input-group {
+  display: inline-block;
+}
+.input-group .bootstrap-tagsinput {
+  width: 330px;
+  margin-bottom: 1px;
+  text-align: left;
+  margin: auto;
+}
 
 h1.wordcloudtext{
  
