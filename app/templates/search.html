@@ -52,7 +52,7 @@
 
        
             <div class = "input-group" >
-            <div class="form-group" style = "width: 600px; margin: auto;">
+            <div class="form-group" style = "width: 650px; margin: auto;">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title" >
             </div> 
         
@@ -83,7 +83,7 @@
      
     
         <form class="form-inline global-search">
-            <div class="form-group" style = "width: 600px; margin: auto;"> 
+            <div class="form-group" style = "width: 650px; margin: auto;"> 
          
                 <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword"> 
                 
@@ -110,12 +110,8 @@
                         <div class="row align-items-center">
                        
                         <div class = "left"> 
-                         <div class="col-md-4 ">
-                          
-                            
+                         <div class="col-md-4 ">                
                             {% if d[1] %}
-
-                            <div> {{d[1]}} </div>
                             <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 180 width = 180
                               onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 180 ; this.height = 180" > </img> 
 
@@ -135,9 +131,8 @@
                                     
                           
                             {% if d[3] %}
-                              <a id = "link" class = "link"   > {{d[3]}} </a> 
+                              <a id = "link" class = "link" style = "display:none;"  > {{d[3]}} </a> 
 
-                              <a id = "newnewlink" class = "newnewlink"   > hi </a> 
                               <a id = "newlink" class = "newlink"  href = {{d[3]}}>   
                               <img src = "https://s.gr-assets.com/assets/badge/goodreads-badge-read-reviews-a8508f765fac427f58da8ebf9e89721a.png" > </img>                            
                             </a>   
@@ -215,15 +210,12 @@
           
             book_list = document.getElementsByClassName("book")
             
-            console.log(book_list);
-            console.log("create a new book for jquery typeahead")
-     
+
             var book_array = []
             for (var i = 0; i < book_list.length; i++){
                 book_array.push(book_list[i].innerText)
             }
-            console.log("new_key_word before")
-
+        
 
             var new_key_word = []
             for ( var i =0 ; i < keyword_array.length ; i ++ ) { 
@@ -234,14 +226,12 @@
 
             }      
 
-            console.log("is this defined?")
             var movies = new Bloodhound({
                       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
                       queryTokenizer: Bloodhound.tokenizers.whitespace, 
                       local : new_key_word             
                     });
-            console.log(movies)
-            console.log("moves bloodhound ever defined?")
+          
                     movies.initialize();
                     $('#keyfield').tagsinput({
                         typeaheadjs: {                   
@@ -282,13 +272,12 @@
                             displayKey: 'value',
                             valueKey: 'name',
                             source: titles.ttAdapter(),
-                            hint: true,
-                            minLength: 10 ,
+                            hint: true, 
                             limit : 3
 
                         },
                     freeinput : false ,
-                    maxTags : 2,
+                    maxTags : 1,
                     delimiterRegex:  /[;]+/
                     
 
