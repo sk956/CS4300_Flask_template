@@ -19,8 +19,8 @@
     maxTags: undefined,
     maxChars: undefined,
     confirmKeys: [13, 44],
-    delimiter: ',',
-    delimiterRegex: null,
+    delimiter: ';',
+    delimiterRegex:  /[;]+/,
     cancelConfirmKeysOnEmpty: true,
     onTagExists: function(item, $tag) {
       $tag.hide().fadeIn();
@@ -44,7 +44,7 @@
     this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
     this.inputSize = Math.max(1, this.placeholderText.length);
 
-    this.$container = $('<div class="bootstrap-tagsinput"></div>');
+    this.$container = $('<div class="bootstrap-tagsinput></div>');
     this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
 
     this.$element.before(this.$container);
@@ -251,7 +251,7 @@
             return self.options.itemValue(item).toString();
           });
 
-      self.$element.val(val, true).trigger('change');
+      self.$element.val(val.join(self.options.delimiter), true).trigger('change');
     },
 
     /**

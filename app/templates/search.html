@@ -8,7 +8,16 @@
             background-attachment: fixed;
             background-size: cover;
           }
-          
+    input[type="text"]
+     {
+        min-width: 800px;
+        min-height:40px; 
+        max-width: 800px ;
+     }
+     button[type="submit"]{
+         min-height:45px;
+     
+     }
 
 
     </style>
@@ -16,8 +25,7 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
-     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
           <link href = "/static/bootstrap-tagsinput.css" rel = "stylesheet" >   
         <link href = "/static/bootstrap-tags-input-typeahead.css" rel = "stylesheet" > 
         <link href = "/static/bootstrap-grid.css" rel = "stylesheet" >   
@@ -29,9 +37,9 @@
 
 
         <form class="form-inline global-search">
-            <h1 style="font-size: 90px; font-family:Apple Chancery, cursive; color: black; margin-bottom:20px">
+            <h1 style="font-size: 90px; font-family: courier, cursive; color: #696969f; margin-bottom:20px">
             B
-            <font color=black>OO</font>
+            <font color=black>O O</font>
             <font color=black>K</font>
             R
             <font color=black>E</font>
@@ -102,11 +110,13 @@
                             
                             {% if d[1] %}
 
-                            <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 160 width = 160 > </img> 
+                            <div> {{d[1]}} </div>
+                            <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 180 width = 180
+                              onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 180 ; this.height = 180" > </img> 
 
                             {% else %}
                             <img class="card-img-top d-flex align-items-center bg-light" src="hee.png"
-                                onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 160 ; this.height = 160">
+                                onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 180 ; this.height = 180">
                             <div class="default_link" style ="display:none;"> {{d[1]}}</div> 
                             {% endif %}
 
@@ -115,13 +125,20 @@
                         <div class="col-md-8">
                         <div class="card-body">
                             <h5 hidden class = "booktitle" style="display: none;"> {{d[0]}}</h5>                     
-                            <h5 class="card-title" >{{d[0]}}</h5>
+                            <h5 class="card-title" style = "color: black ; font-size : 15px" >{{d[0]}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">by GoodReads</h6>   
-                                
-                            <a id = "link" class = "link"  > {{d[3]}} </a> 
+                                    
+                          
+                            {% if d[3] %}
+                              <a id = "link" class = "link"   > {{d[3]}} </a> 
 
-                            <a id = "newlink" class = "newlink"  >  newbutton 
+                              <a id = "newnewlink" class = "newnewlink"   > hi </a> 
+                              <a id = "newlink" class = "newlink"  >   
+                              <img src = "https://s.gr-assets.com/assets/badge/goodreads-badge-read-reviews-a8508f765fac427f58da8ebf9e89721a.png" > </img>                            
                             </a>   
+                            {% endif %}
+                         
+
                         </div>
                         </div>
                     </div>
@@ -231,7 +248,8 @@
                             limit : 10
                         },
                     freeinput : false ,
-                    maxTags : 10
+                    maxTags : 10,
+                    delimiterRegex: /[;]+/
 
                 }
 
@@ -241,7 +259,6 @@
             var new_book_word = []
             for ( var i =0 ; i < book_array.length ; i ++ ) { 
                 word = book_array[i].trim()
-             
                 new_book_word.push({ "value" : word , "name" : word })
 
             }    
@@ -256,30 +273,25 @@
       titles.initialize() 
 
         $('#titlefield').tagsinput({
-                        typeaheadjs: {
-                      
+                        typeaheadjs: { 
                             displayKey: 'value',
                             valueKey: 'name',
                             source: titles.ttAdapter(),
                             hint: true,
                             minLength: 10 ,
-                            limit : 5
+                            limit : 3
+
                         },
                     freeinput : false ,
-                    maxTags : 2
+                    maxTags : 2,
+                    delimiterRegex:  /[;]+/
+                    
 
                 }
 
                 ); 
 
-                $('#lolzzfield').tokenfield({
-                    autocomplete: {
-                        source: book_array
-                    }, 
-           
-                    noDuplicate: true ,
-                    lookupLimit: 1
-                }); 
+        
 
         });  
 
@@ -294,23 +306,18 @@
             for (var i =0 ; i < links.length; i++) {
 
                 createlink= link[i].innerText
-         
                 console.log(createlink)
-            $("a#newlink").on('click', function(e){
-                window.location= createlink
-                e.preventDefault()
-                  console.log("go through click?")
+               
+            $("a#newnewlink").on('click', function(e){
+                console.log(createlink)
+                window.location.href= createlink
+             
             });
 
-                console.log(createlink)
-                console.log("HI there")
             }
-           
-
-
-
+        
              var container = document.getElementsByClassName("imagediv");
-                    link_lst = document.getElementsByClassName("default_link")
+             link_lst = document.getElementsByClassName("default_link")
                     
                     for (var i=0;i<link_lst.length;i++){
                         links = link_lst[i].innerText
