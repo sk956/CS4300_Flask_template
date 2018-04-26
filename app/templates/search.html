@@ -1,16 +1,23 @@
 <html>
 
-<body > 
 
     <style> 
 
     body {
-            background-image: url("https://images.pexels.com/photos/545049/pexels-photo-545049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-            font-family: 'Play', sans-serif;
+            
             background-attachment: fixed;
             background-size: cover;
           }
-          
+    input[type="text"]
+     {
+        min-width: 800px;
+        min-height:40px; 
+        max-width: 800px ;
+     }
+     button[type="submit"]{
+         min-height:45px;
+     
+     }
 
 
     </style>
@@ -18,35 +25,40 @@
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
-
-        <link href = "/static/tokenfield-typeahead.css" rel = "stylesheet" > 
+       
+          <link href = "/static/bootstrap-tagsinput.css" rel = "stylesheet" >   
+        <link href = "/static/bootstrap-tags-input-typeahead.css" rel = "stylesheet" > 
         <link href = "/static/bootstrap-grid.css" rel = "stylesheet" >   
         <link href = "/static/jquery-ui.theme.css" rel = "stylesheet" > 
         <link href = "/static/jquery-ui.css" rel = "stylesheet" > 
         <link href = "/static/hover.css" rel = "stylesheet" > 
         <link href="/static/jqcloud.css" type="text/css" rel="stylesheet"  />
     </head>
+<body>  
 
 
         <form class="form-inline global-search">
-            <h1 style="font-size: 90px; font-family:Apple Chancery, cursive; color: #4285F4; margin-bottom:20px">
+            <h1 style="font-size: 90px; font-family: courier, cursive; color: #696969f; margin-bottom:20px">
             B
-            <font color=#EA4335>OO</font>
-            <font color=#FBBC05>K</font>
+            <font color=black>O O</font>
+            <font color=black>K</font>
             R
-            <font color=#34A853>E</font>
-            <font color=#EA4335>C</font>
+            <font color=black>E</font>
+            <font color=black>C</font>
             </h1>
 
 
             <br><br>
 
-            <div class="form-group">
+       
+            <div class = "input-group" >
+            <div class="form-group" style = "width: 650px; margin: auto;">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title" >
-            </div>
+            </div> 
+        
 
             <button type="submit" class="btn btn-info"> Go </button>
-
+            </div>
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
@@ -55,6 +67,7 @@
                 <div hidden class = "book" style="display: none;"> {{book}}</div>
             {% endfor %}
         </form>
+
      
 
         <form class="form-inline global-search">
@@ -70,8 +83,10 @@
      
     
         <form class="form-inline global-search">
-            <div class="form-group">
-                <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword">
+            <div class="form-group" style = "width: 650px; margin: auto;"> 
+                
+                <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword"> 
+                
             </div>
             <button type="submit" class="btn btn-info"> Go </button>
         </form>
@@ -83,8 +98,8 @@
         {% if top_books %}
         <div >
             <h1  style="display:none;">{{top_books_message}}</h1>
-             <div style=" border-radius: 25px;border:10px; border-style:solid; border-color:rgba(153, 255, 102,0.3); padding: 10em; margin-right: 30px;
-    margin-left: 30px;background-color:rgba(153, 255, 153,0.3);"> 
+             <div style=" border-radius: 25px;border:10px; border-style:solid; border-color:#86B3D1; padding: 10em; margin-right: 30px;
+    margin-left: 30px;background-color:#86B3D1; background-color: transparent;"> 
             {% for d in top_books %}
              <div class="row align-items-center">
                     <div style="margin-bottom:40px">
@@ -95,16 +110,14 @@
                         <div class="row align-items-center">
                        
                         <div class = "left"> 
-                         <div class="col-md-4 ">
-                          
-                            
+                         <div class="col-md-4 ">                
                             {% if d[1] %}
-
-                            <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 160 width = 160 > </img> 
+                            <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 180 width = 180
+                              onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 180 ; this.height = 180" > </img> 
 
                             {% else %}
                             <img class="card-img-top d-flex align-items-center bg-light" src="hee.png"
-                                onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 160 ; this.height = 160">
+                                onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 180 ; this.height = 180">
                             <div class="default_link" style ="display:none;"> {{d[1]}}</div> 
                             {% endif %}
 
@@ -113,14 +126,19 @@
                         <div class="col-md-8">
                         <div class="card-body">
                             <h5 hidden class = "booktitle" style="display: none;"> {{d[0]}}</h5>                     
-                            <h5 class="card-title" >{{d[0]}}</h5>
+                            <h5 class="card-title" style = "color: black ; font-size : 15px" >{{d[0]}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">by GoodReads</h6>   
-                                
-                            <a id = "link" class = "link" > {{d[3]}}
-                            </a> 
+                                    
+                          
+                            {% if d[3] %}
+                              <a id = "link" class = "link" style = "display:none;"  > {{d[3]}} </a> 
 
-                            <a id = "newlink" class = "newlink"  >  newbutton 
+                              <a id = "newlink" class = "newlink"  href = {{d[3]}}>   
+                              <img src = "https://s.gr-assets.com/assets/badge/goodreads-badge-read-reviews-a8508f765fac427f58da8ebf9e89721a.png" > </img>                            
                             </a>   
+                            {% endif %}
+                         
+
                         </div>
                         </div>
                     </div>
@@ -138,9 +156,12 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>       
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="/static/bootstrap-tagsinput.js" > </script>
         <script src="/static/typeahead.js" > </script>
+    
         <script src = "/static/jquery-ui.js"> </script>
         <script type="text/javascript" src="/static/jqcloud.js"></script> 
         <script> 
@@ -189,15 +210,12 @@
           
             book_list = document.getElementsByClassName("book")
             
-            console.log(book_list);
-            console.log("create a new book for jquery typeahead")
-     
+
             var book_array = []
             for (var i = 0; i < book_list.length; i++){
                 book_array.push(book_list[i].innerText)
             }
-            console.log("new_key_word before")
-
+        
 
             var new_key_word = []
             for ( var i =0 ; i < keyword_array.length ; i ++ ) { 
@@ -208,16 +226,13 @@
 
             }      
 
-            console.log("is this defined?")
             var movies = new Bloodhound({
                       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
                       queryTokenizer: Bloodhound.tokenizers.whitespace, 
                       local : new_key_word             
                     });
-            console.log(movies)
-            console.log("moves bloodhound ever defined?")
+          
                     movies.initialize();
-                    console.log("typeahed.js")
                     $('#keyfield').tagsinput({
                         typeaheadjs: {                   
                             displayKey: 'value',
@@ -228,7 +243,8 @@
                             limit : 10
                         },
                     freeinput : false ,
-                    maxTags : 10
+                    maxTags : 10,
+                    delimiterRegex: /[;]+/
 
                 }
 
@@ -238,7 +254,6 @@
             var new_book_word = []
             for ( var i =0 ; i < book_array.length ; i ++ ) { 
                 word = book_array[i].trim()
-             
                 new_book_word.push({ "value" : word , "name" : word })
 
             }    
@@ -253,21 +268,24 @@
       titles.initialize() 
 
         $('#titlefield').tagsinput({
-                        typeaheadjs: {
-                      
+                        typeaheadjs: { 
                             displayKey: 'value',
                             valueKey: 'name',
                             source: titles.ttAdapter(),
-                            hint: true,
-                            minLength: 10 ,
-                            limit : 5
+                            hint: true, 
+                            limit : 3
+
                         },
                     freeinput : false ,
-                    maxTags : 2
+                    maxTags : 1,
+                    delimiterRegex:  /[;]+/
+                    
 
                 }
 
                 ); 
+
+        
 
         });  
 
@@ -282,23 +300,18 @@
             for (var i =0 ; i < links.length; i++) {
 
                 createlink= link[i].innerText
-         
                 console.log(createlink)
-            $("a#newlink").on('click', function(e){
-                window.location= createlink
-                e.preventDefault()
-                  console.log("go through click?")
+               
+            $("a#newnewlink").on('click', function(e){
+                console.log(createlink)
+                window.location.href= createlink
+             
             });
 
-                console.log(createlink)
-                console.log("HI there")
             }
-           
-
-
-
+        
              var container = document.getElementsByClassName("imagediv");
-                    link_lst = document.getElementsByClassName("default_link")
+             link_lst = document.getElementsByClassName("default_link")
                     
                     for (var i=0;i<link_lst.length;i++){
                         links = link_lst[i].innerText
