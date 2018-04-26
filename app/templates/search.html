@@ -50,15 +50,14 @@
 
             <br><br>
 
-       
-            <div class = "input-group" >
+  
             <div class="form-group" style = "width: 650px; margin: auto;">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title" >
             </div> 
         
 
             <button type="submit" class="btn btn-info"> Go </button>
-            </div>
+           
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
