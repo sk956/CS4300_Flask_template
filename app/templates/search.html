@@ -13,7 +13,7 @@
     {
        min-width: 500px;
         min-height:40px; 
-       max-width: 800px ;
+       max-width: 600px ;
      }
      button[type="submit"]{
          min-height:45px;
@@ -49,13 +49,13 @@
 
 
             <br><br>
-
+            <div class = "input-group" > 
             <div class="form-group">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title"  width = "500px">
-            </div>
-
+            </div> 
+           
             <button type="submit" class="btn btn-info"> Go </button>
-
+            </div>
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
@@ -86,8 +86,12 @@
             </div>
             <button type="submit" class="btn btn-info"> Go </button>
         </form>
-
-
+ 
+      
+<a class="btn btn-lg btn-success" href="secondpage">Sign up</a>
+    <form action="{{ url_for('irsystem.secondpage') }}" > 
+         <button class="btn btn-info" > Next Page </button> 
+    </form>
         
         <form class="form-inline global-search">
 
@@ -126,11 +130,14 @@
                             <h5 hidden class = "booktitle" style="display: none;"> {{d[0]}}</h5>                     
                             <h5 class="card-title" >{{d[0]}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">by GoodReads</h6>   
-                                
-                            <a id = "link" class = "link"  > {{d[3]}} </a> 
-
-                            <a id = "newlink" class = "newlink"  >  newbutton 
-                            </a>   
+                             {% if d[3] %}
+                               <a id = "link" class = "link" style = "display: none;" > {{d[3]}} </a> 
+ 
+                              <a id = "newlink" class = "newlink"  href = {{d[3]}}>   
+                               <img src = "https://s.gr-assets.com/assets/badge/goodreads-badge-read-reviews-a8508f765fac427f58da8ebf9e89721a.png" > </img>                            
+                             </a>   
+                             {% endif %}
+                      
                         </div>
                         </div>
                     </div>

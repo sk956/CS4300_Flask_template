@@ -152,9 +152,11 @@ def put_books_in_db(hash_factor = 100):
 # 	available_words = []
 # 	available_books = []
 # 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books)
+@irsystem.route('/secondpage', methods=['GET'])
+def secondpage(): 
+	return render_template("second.html")
 
-
-@irsystem.route('/', methods=['GET'])
+@irsystem.route('/main', methods=['GET'])
 def search():
 	available_words = json.load(open('words.json'))
 	available_words = [unicodedata.normalize('NFKD', w).encode('ascii','ignore') for w in available_words]
