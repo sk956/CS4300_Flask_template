@@ -52,31 +52,33 @@
         Hannah Lee | Jason Cho | Seyun Kim | Hyun Kyo Jung | Linda Lu
       </p>
     </div>
-<div id = "formm">
-        <form class="form-inline global-search">
+
+        <form class="form-horizontal row global-search">
             <h1 style="font-size: 900%; font-family: 'Vidaloka', serif; color: white; margin-bottom:20px">
               BookRec
             </h1>
             <br><br><br><br>
-            <div class="form-group">
+            <div class="form-group col-sm-12">
+                <label class="control-label col-sm-2">Supplier</label>
+                 <div class="col-sm-10">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title"  width = "500px">
+                </div>
             </div>
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
-
             {% for book in avail_books %}
                 <div hidden class = "book" style="display: none;"> {{book}}</div>
             {% endfor %}
-            
-            <div class="form-group">
-
+            <div class="form-group col-sm-12">
+                <label class="control-label col-sm-2">Supplier</label>
+                <div class="col-sm-10">
                 <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword" width = "500px" >
+                </div>
             </div>
-             <button class="btn btn-info" > Next Page </button>
+             <button class="btn btn-info" > Go </button>
         </form>
 
-</div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
