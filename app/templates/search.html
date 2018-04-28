@@ -14,12 +14,9 @@
       text-align: right;
     }
     body {
-
-            /* background-image: url("https://images.pexels.com/photos/545049/pexels-photo-545049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
             background-image: url("http://college.koreadaily.com/wp-content/uploads/2016/07/light-465350_960_720.jpg");
             background-repeat:no-repeat;
             background-size: 100% 100%;
-
           }
 
      input[type="text"]
@@ -30,7 +27,6 @@
      }
      button[type="submit"]{
          min-height:45px;
-
     }
     #formm {
       position: absolute;
@@ -40,12 +36,10 @@
     /* #titlefield {
       font-family: 'Vidaloka', serif;
     }
-
     #keyfield {
       font-family: 'Vidaloka', serif;
     } */
     </style>
-
     <head>
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
@@ -71,16 +65,10 @@
             <h1 style="font-size: 900%; font-family: 'Vidaloka', serif; color: white; margin-bottom:20px">
               BookRec
             </h1>
-
-
             <br><br><br><br>
-
             <div class="form-group">
                 <input type="text" id="titlefield" name="title_search" class="form-control" placeholder="Input Book Title"  width = "500px">
             </div>
-
-            <button type="submit" class="btn btn-info"> Go </button>
-
             {% for keyword in avail_keywords %}
                 <div hidden class = "keyword" style="display: none;"> {{keyword}}</div>
             {% endfor %}
@@ -92,82 +80,14 @@
         </form >
 
         <form class="form-inline global-search">
-
-        {% if word_cloud %}
-            <h1 id = "wordcloudtext" style="display: none;" > {{word_cloud_message}}</h1>
-            {% for d in word_cloud %}
-             <div id = "donewordcloud" > </div>
-            <div hidden class = "wordcloud" style="display: none;"> {{d}}</div>
-            {% endfor %}
-        {% endif %}
-        </form>
-
-
-        <form class="form-inline global-search">
             <div class="form-group">
 
                 <input id="keyfield" type="text" name="keyword_search" class="form-control" placeholder="Input Keyword" width = "500px" >
 
             </div>
-            <button type="submit" class="btn btn-info"> Go </button>
         </form>
 
 
-        <form class="form-inline global-search">
-
-        {% if top_books %}
-        <div >
-            <h1  style="display:none;">{{top_books_message}}</h1>
-             <div style=" border-radius: 25px;border:10px; border-style:solid; border-color:#86B3D1; padding: 10em; margin-right: 30px;
-    margin-left: 30px;background-color:#86B3D1; background-color: transparent;">
-            {% for d in top_books %}
-             <div class="row align-items-center">
-                    <div style="margin-bottom:40px">
-                    <div class="hvr-float-shadow">
-                    <div class="container">
-
-
-                        <div class="row align-items-center">
-
-                        <div class = "left">
-                         <div class="col-md-4 ">
-
-
-                            {% if d[1] %}
-
-                            <img class="card-img-top d-flex align-items-center bg-light" src={{d[1]}} height = 160 width = 160 > </img>
-
-                            {% else %}
-                            <img class="card-img-top d-flex align-items-center bg-light" src="hee.png"
-                                onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'; this.width = 160 ; this.height = 160">
-                            <div class="default_link" style ="display:none;"> {{d[1]}}</div>
-                            {% endif %}
-
-                        </div>
-                        </div>
-                        <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 hidden class = "booktitle" style="display: none;"> {{d[0]}}</h5>
-                            <h5 class="card-title" >{{d[0]}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">by GoodReads</h6>
-
-                            <a id = "link" class = "link"  > {{d[3]}} </a>
-
-                            <a id = "newlink" class = "newlink"  >  newbutton
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            {% endfor %}
-        </div>
-        </div>
-        {% endif %}
-        </form>
         <form  class="form-inline global-search"  >
            <button class="btn btn-info" > Next Page </button>
       </form>
@@ -360,7 +280,5 @@
         </script>
 
     </body>
-
-
 
 </html>
