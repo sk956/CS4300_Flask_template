@@ -74,6 +74,7 @@ def search():
 		word_cloud = []
 		top_books = []
 
+
 	elif keyword_input is not None:
 		word_cloud_message = ''
 		word_cloud = []
@@ -125,6 +126,9 @@ def search():
 					each_book_list += errorlist
 
 				top_books.append(each_book_list)
+			final_book_list = create_three_list(top_books)  
+
+
 
 	else:
 		top_books_message = ""
@@ -138,4 +142,19 @@ def search():
 			b = Books.query.filter_by(index = int(i)).first()
 			word_cloud_message = 'Word cloud is: '	
 			word_cloud = pre_db_book_to_closest_words(b, int(i))
-	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_words, avail_books = available_books)
+
+
+	def create_three_list(lst) :  
+		print("create_three_list enter")
+		final_book_list  = [] 
+		while (i < len(lst)) : 
+			list_three = [] 
+			for j in range(3) :  
+				list_three.append(lst[i+j]) 
+			final_book_list.append(list_three) 
+			i+=3  
+		return final_book_list 
+
+	
+
+	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = final_book_list, avail_keywords = available_words, avail_books = available_books)
