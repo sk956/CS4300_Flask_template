@@ -61,20 +61,17 @@ def secondpage():
 	#encode everything to make sure that the output is the correct ouput format 
 
 	for result in results :
-		link=result[3].encode('ascii','ignore')
-		link ="http://www.goodreads.com/book/show/" + link
-		result[1] = result[1].encode('ascii','ignore') 
-		result[2] = result[2].encode('ascii','ignore') 
-		url = "http://covers.openlibrary.org/b/isbn/" + result[1]  + '-M.jpg'
-		url2 = "http://covers.openlibrary.org/b/isbn/" + result[2]  + '-M.jpg'
-		url=url.encode('ascii','ignore') 
-		url2=url2.encode('ascii','ignore') 
-		result[1] = result[1].encode('ascii', 'ignore')
-		result[1] = url  
-		result[2] = url2 
-		result[3] = link 
+		for i in range(4):
+			if result[i] is None:
+				result[i] = ''
+			else: 
+				result[i] = result[i].encode('ascii','ignore')
+		result[3] = "http://www.goodreads.com/book/show/" + result[3]
+		result[2] = "http://covers.openlibrary.org/b/isbn/" + result[2] + "-M.jpg"
+		result[1] = "http://covers.openlibrary.org/b/isbn/" + result[1] + "-M.jpg"
 
-	return render_template('second.html', name=project_name, netid=net_id, word_cloud_message='', 
+
+	return render_template('secondpage.html', name=project_name, netid=net_id, word_cloud_message='', 
 		top_books_message=top_book_message, word_cloud=[], top_books = results, avail_keywords = [], avail_books = [])
  
 	
@@ -93,10 +90,12 @@ def search():
 	print("first page")
 
 	if title_input is not None or keyword_input is not None :
-		w = word_to_closest_books(keyword_input)
-		b = book_to_closest_books(title_input)
-		result = combine_results(w, b) 
-		session["result"] = result 
+		print(title_input)
+		print(keyword_input)
+		#w = word_to_closest_books(keyword_input)
+		#b = book_to_closest_books(title_input)
+		#result = combine_results(w, b) 
+		#session["result"] = result 
 		session["title_input"]  = title_input 
 		session["keyword_input"] = keyword_input
 		return redirect(url_for('irsystem.secondpage'))
