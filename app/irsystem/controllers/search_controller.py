@@ -154,7 +154,30 @@ def put_books_in_db(hash_factor = 100):
 # 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books)
 @irsystem.route('/secondpage', methods=['GET'])
 def secondpage(): 
-	return render_template("second.html")
+	print("enter second page ")
+	results = session.get('result', None)
+	title_input = session.get('title_input', None) 
+	keyword_input = session.get('keyword_input', None)
+	top_book_message = title_input.encode('ascii','ignore') + keyword_input.encode('ascii', 'ignore')
+	#encode everything to make sure that the output is the correct ouput format 
+
+	for result in results :
+		link=result[3].encode('ascii','ignore')
+		link ="http://www.goodreads.com/book/show/" + link
+		result[1] = result[1].encode('ascii','ignore') 
+		result[2] = result[2].encode('ascii','ignore') 
+		url = "http://covers.openlibrary.org/b/isbn/" + result[1]  + '-M.jpg'
+		url2 = "http://covers.openlibrary.org/b/isbn/" + result[2]  + '-M.jpg'
+		url=url.encode('ascii','ignore') 
+		url2=url2.encode('ascii','ignore') 
+		result[1] = result[1].encode('ascii', 'ignore')
+		result[1] = url  
+		result[2] = url2 
+		result[3] = link 
+
+	return render_template('second.html', name=project_name, netid=net_id, word_cloud_message='', 
+		top_books_message=top_book_message, word_cloud=[], top_books = results, avail_keywords = [], avail_books = [])
+ 
 
 @irsystem.route('/main', methods=['GET'])
 def search():
@@ -165,83 +188,16 @@ def search():
 
 	title_input = request.args.get('title_search')
 	keyword_input = request.args.get('keyword_search') 
-	print(title_input)
+	print("first page")
 
-	book_to_index = json.load(open("book_to_index.json"))
-	book_to_index = {key.strip() : value for key, value in book_to_index.iteritems()}
+	if title_input is not None or keyword_input is not None :
+		w = word_to_closest_books(keyword_input)
+		b = book_to_closest_books(title_input)
+		result = combine_results(w, b) 
+		session["result"] = result 
+		session["title_input"]  = title_input 
+		session["keyword_input"] = keyword_input
+		return redirect(url_for('irsystem.secondpage'))
+	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message='', top_books_message='', 
+		word_cloud=[], top_books = [], avail_keywords = available_words, avail_books = available_books)
 
-
-	word_to_index = json.load(open("word_to_index.json"))
-	book_image_url =json.load(open("ISBN_100000_to_200000.json"))
-
-
-
-	if title_input == None and keyword_input == None:
-		word_cloud_message = ''
-		top_books_message =  ''
-		word_cloud = []
-		top_books = []
-
-	elif keyword_input is not None: 
-		word_cloud_message = ''
-		word_cloud = []
-		top_books = []
-		keywords = keyword_input.split(',')
-		rel_keywords = []
-		for keyword in keywords:
-			if keyword not in word_to_index.keys():
-				top_books.append(keyword + " is not in our database.")
-			else:
-				rel_keywords.append(keyword)
-		if len(top_books) == len(keywords): 
-			top_books_message = 'All the keywords are not in our database.'
-		else:
-			top_books_message = "Top 10 books for the keyword are:"
-			word_list = []
-			ith_list = []
-			print(keyword_input)
-			for keyword in rel_keywords:
-				i = word_to_index[keyword]
-				w = Words.query.filter_by(start_index = int(i)/100*100).first()
-				word_list.append(w)
-				ith_list.append(int(i)%100) 
-			for close_book in db_word_to_closest_books(word_list, ith_list):
-				each_book_list =[]
-				each_book_list.append(close_book)
-				if close_book in book_image_url:
-					print("hellothere")
-					isbn= book_image_url[close_book]
-					print("notisbn")
-					newisbn =[]
-					for nums in isbn[:2] : 
-						url = "http://covers.openlibrary.org/b/isbn/" + nums +"-M.jpg"
-						url=url.encode('ascii','ignore')
-						print(url)
-						newisbn.append(url)
-					link=isbn[2].encode('ascii','ignore')
-					link ="http://www.goodreads.com/book/show/" + link
-					newisbn.append(link)
-					for nounicode in newisbn: 
-						each_book_list.append(nounicode)
-
-					each_book_list.append([])
-				else: 
-					errorlist = [None ,None , None ]
-					each_book_list += errorlist
-					
-				top_books.append(each_book_list)
-
-
-	else:
-		top_books_message = ""
-		top_books = []
-
-		if title_input not in book_to_index.keys():
-			word_cloud_message = ''
-			word_cloud = ['The book is not in our database.']
-		else:
-			i = book_to_index[title_input]
-			b = Books.query.filter_by(start_index = int(i)/100*100).first()
-			word_cloud_message = 'Word cloud is: '	
-			word_cloud = db_book_to_closest_words(b, int(i) % 100)
-	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message=word_cloud_message, top_books_message=top_books_message, word_cloud=word_cloud, top_books = top_books, avail_keywords = available_words, avail_books = available_books)
