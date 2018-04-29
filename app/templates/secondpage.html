@@ -173,6 +173,19 @@
     color: white;
 }
 
+#realimage {
+    position: absolute; 
+    top: 0;
+    left: 0;
+
+} 
+#defaultimage {
+    position: relative; 
+    top: 0px; 
+    left: 0px ;
+
+}
+
 </style>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Vidaloka" rel="stylesheet">
@@ -221,7 +234,7 @@ When 16-year-old Katniss's young sister, Prim, is selected as District 12's fema
   </div>
 
 <div class="container">
-  <a class="btn btn-lg btn-success"href="main" id = "refresh_button" style = "font-family: 'Vidaloka', serif; "> Go Back </a>
+  <a class="btn btn-lg btn-success" href="main" id = "refresh_button" style = "font-family: 'Vidaloka', serif; "> Go Back </a>
     <div>
     <center style = "margin-top : 8% ;font-family: 'Vidaloka', serif; margin-bottom: 6%;  color: white; font-size: 400%"> Showing results for:  {{ top_books_message }} </center>
 
@@ -237,8 +250,11 @@ When 16-year-old Katniss's young sister, Prim, is selected as District 12's fema
     margin-bottom: 100px" >
             <div  style = "width:3%" ></div>
 
-            <div class ="containerimage">
-            <img src={{top_books[0][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            <div class ="containerimage" style="position: relative; left: 0; top: 0;"">
+            <img id = "defaultimage" src= "https://s.gr-assets.com/assets/icons/goodreads_icon_200x200-8b5b322a54ffbe04db26585de0830763.png" alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            <img id="realimage" src={{top_books[0][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            
+
             <div class="middle">
             <div class="text">
                 <h3>{{top_books[0][0]}}</h3>
@@ -250,7 +266,9 @@ When 16-year-old Katniss's young sister, Prim, is selected as District 12's fema
         </div>
 
      <div class ="containerimage">
-            <img src={{top_books[1][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            <img src={{top_books[1][1]}}
+             onError="this.onerror=null;this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'" ;  
+             alt="image"  class="img-fluid"  width =  "90%" height = "400px">
             <div class="middle">
             <div class="text">
                 <h3>{{top_books[1][0]}}</h3>
@@ -278,7 +296,9 @@ When 16-year-old Katniss's young sister, Prim, is selected as District 12's fema
                     <div  style = "width:3%" ></div>
 
                     <div class ="containerimage">
-                  <img src={{top_books[3][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+                  <img src={{top_books[3][1]}}
+                  onError="this.src='https://s.gr-assets.com/assets/icons/goodreads_icon_1000x1000-aed808dec2093e20867b35cd56d9862d.png'" ;  
+                   alt="image"  class="img-fluid"  width =  "90%" height = "400px">
                     <div class="middle">
                     <div class="text">
                         <h3>{{top_books[3][0]}}</h3>
@@ -288,8 +308,11 @@ When 16-year-old Katniss's young sister, Prim, is selected as District 12's fema
                     </div>
                 </div>
 
-             <div class ="containerimage">
-                    <img src={{top_books[4][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+             <div class ="containerimage" style="position: relative; left: 0; top: 0;"">
+                     <img id = "defaultimage" src= "https://s.gr-assets.com/assets/icons/goodreads_icon_200x200-8b5b322a54ffbe04db26585de0830763.png" alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            <img id="realimage" src={{top_books[4][1]}} alt="image"  class="img-fluid"  width =  "90%" height = "400px">
+            
+                  
                     <div class="middle">
                     <div class="text">
                         <h3>{{top_books[4][0]}}</h3>

@@ -89,14 +89,19 @@ def search():
 		 	keyword_input  = unicode(keyword_input.encode('ascii', 'ignore').lstrip(), 'utf-8')
 		 	# title_input = title_input.lstrip()  
 		 	# unicode(title_input, 'utf-8')
+		if title_input != "" or keyword_input != "" :  
+			w = word_to_closest_books(keyword_input)
+			b = book_to_closest_books(title_input)
+			result = combine_result(w, b) 
+			session["result"] = result 
+			session["title_input"]  = title_input 
+			session["keyword_input"] = keyword_input
+			return redirect(url_for('irsystem.secondpage')) 
+		else : 
+			print("enter both empty")
+			return render_template('search.html', name=project_name, netid=net_id, word_cloud_message='', top_books_message='', 
+		word_cloud=[], top_books = [], avail_keywords = available_words, avail_books = available_books)
 
-		w = word_to_closest_books(keyword_input)
-		b = book_to_closest_books(title_input)
-		result = combine_result(w, b) 
-		session["result"] = result 
-		session["title_input"]  = title_input 
-		session["keyword_input"] = keyword_input
-		return redirect(url_for('irsystem.secondpage'))
 	return render_template('search.html', name=project_name, netid=net_id, word_cloud_message='', top_books_message='', 
 		word_cloud=[], top_books = [], avail_keywords = available_words, avail_books = available_books)
 
