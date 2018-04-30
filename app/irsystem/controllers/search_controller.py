@@ -96,7 +96,9 @@ def secondpage():
 		result[1] = "http://covers.openlibrary.org/b/isbn/" + result[1] + "-M.jpg"
 		for i in range(0, len(arr)-1):
 			result[5] = result[5].replace(arr[i],"")
-
+		title_by_list = result[0].split("(by)") 
+		print(title_by_list) 
+		result[0] = title_by_list[0].strip()
 
 	return render_template('secondpage.html', name=project_name, netid=net_id, word_cloud_message='',
 		top_books_message=top_book_message, word_cloud=[], top_books = top_15_book_info, avail_keywords = [], avail_books = [])
