@@ -83,6 +83,21 @@ btn-large{
 
 }
 
+.buttontag {
+    background-color: white;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    border-radius: 12px; 
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
 
 letter-spacing: 1px;
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

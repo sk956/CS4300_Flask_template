@@ -11,7 +11,14 @@
       font-size: 20px;
       margin: 1.5% 1.5%;
       text-transform: uppercase;
+
     }
+
+    #gobutton:hover,
+    #gobutton:focus {
+     box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+     transform: translateY(-0.25em);
+}
     .centered {
       position: fixed;
       top: 50%;
@@ -114,6 +121,7 @@
              <button id="gobutton" class="btn btn-info" > Go </button>
             </div>
             <h3 style = "color:white; font-family: 'Vidaloka', serif; font-size : 18px"> {{error_message}} </h3>
+            <button id="gobutton" style= " color:gray; font-size: 15px; text-transform: lowercase;  border-radius: 18px">Button</button>
             </form>
           </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
