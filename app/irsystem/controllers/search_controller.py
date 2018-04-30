@@ -120,8 +120,9 @@ def search():
 		if title_input !="" or keyword_input!="":
 			sim_scores = inputs_to_scores(keyword_input, title_input)
 			if sim_scores is None:
+				error_message = "The Input is Invalid Please Use the Autocomplete Functionality"
 				return render_template('search.html', name=project_name, netid=net_id, word_cloud_message='', top_books_message='',\
-						word_cloud=[], top_books = [], avail_keywords = available_words, avail_books = available_books)
+						word_cloud=[], top_books = [], error_message = error_message, avail_keywords = available_words, avail_books = available_books)
 			top15_asorted = scores_to_asort(sim_scores)
 			session["top15_asorted"] = top15_asorted
 			session["title_input"]  = title_input

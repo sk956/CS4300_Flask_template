@@ -32,12 +32,18 @@ def inputs_to_scores(words, books, length = 61082, k =100):
 		if word == '':
 			del word_inputs[0]
 			break
-		vector_sum += np.fromstring(Words.query.filter_by(name = word).first().vector, sep=', ')
+		word_object = Words.query.filter_by(name = word).first()
+		if word_object is None:
+			return None
+		vector_sum += np.fromstring(word_object.vector, sep=', ')
 	for book in book_inputs:
 		if book == '':
 			del book_inputs[0]
 			break
-		vector_sum += np.fromstring(Books.query.filter_by(name = book).first().vector, sep=', ')
+		book_object = Books.query.filter_by(name = book).first()
+		if book_object is None:
+			return None
+		vector_sum += np.fromstring(book_object.vector, sep=', ')
 	if len(word_inputs) + len(book_inputs) == 0:
 		return None
 	vector_sum /= len(word_inputs) + len(book_inputs)
