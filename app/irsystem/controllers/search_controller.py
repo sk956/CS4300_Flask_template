@@ -80,9 +80,9 @@ def secondpage():
 				result[i] = ''
 			else: 
 				result[i] = unicodedata.normalize('NFKD', result[i]).encode('ascii','ignore')
-		if result[3] != "" :
+		if result[3] != "":
 			result[3] = "http://www.goodreads.com/book/show/" + result[3]
-		else :
+		else:
 			result[3] =""
 		result[2] = "http://covers.openlibrary.org/b/isbn/" + result[2] + "-M.jpg"
 		result[1] = "http://covers.openlibrary.org/b/isbn/" + result[1] + "-M.jpg"
